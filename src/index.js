@@ -62,21 +62,21 @@ const addList = countries => {
 const addInfo = countries => {
   const markup = countries
     .map(
-      country =>
-        `<div class="info-heading">
+        country => 
+            `<div class="info-heading">
           <img
-            class="info-flag"
+            class="country-flag"
             src="${country.flags.svg}"
             alt="${country.name.official} flag"
           />
           <h1 class="info-headline">${country.name.official}</h1>
         </div>
         <ul class="info-list">
-         <li class="info-item"><b>Capital: </b>${country.calital}</li>
+         <li class="info-item"><b>Capital: </b>${country.capital}</li>
          <li class="info-item"><b>Population: </b>${country.population}</li>
-         <li class="info-item"><b>Languages: </b>${country.languages}</li>
+         <li class="info-item"><b>Languages: </b>${Object.values(country.languages).join(', ')}</li>
         </ul>`
-    )
+        )
     .join('');
   countryInfo.innerHTML = markup;
 };

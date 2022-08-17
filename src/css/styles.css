@@ -18,3 +18,26 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
+
+/* ===== COUNTRIES STYLES ===== */
+
+.country-list {
+  list-style: none;
+  
+}
+
+.country-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 30px;
+}
+
+.country-flag {
+  width: 60px;
+  margin-right: 20px;
+}
+
+.info-heading {
+  display: flex;
+}
