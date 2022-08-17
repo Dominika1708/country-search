@@ -10,7 +10,37 @@ const countryInfo = document.querySelector('.country-info');
 
 input.addEventListener(
   'input',
-  debounce(() => {}, DEBOUNCE_DELAY)
+  debounce(() => {
+    let typedInput = input.value.trim();
+    if (typedInput === '') {
+      countryList.innerHTML = '';
+      countryInfo.innerHTML = '';
+      return;
+    }
+    return fetchCountries(typedInput)
+      .then(countries => {
+        if (countries.length > 10) {
+          Notiflix.Notify.info(
+            'Too many matches found. Please enter a more specific name.'
+          );
+          countryList.innerHTML = '';
+          countryInfo.innerHTML = '';
+        }
+        if (countries.length <= 10 && countries.length >= 2) {
+          addList(countries);
+          countryInfo.innerHTML = '';
+        }
+        if (countries.length === 1) {
+          countryList.innerHTML = '';
+          addInfo(countries);
+        }
+      })
+      .catch(() => {
+        Notiflix.Notify.failure('Oops, there is no country with that name');
+        countryList.innerHTML = '';
+        countryInfo.innerHTML = '';
+      });
+  }, DEBOUNCE_DELAY)
 );
 
 const addList = countries => {
